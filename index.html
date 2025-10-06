@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Menu hebdomadaire du restaurant traiteur">
+    <title>Menu Hebdomadaire - Traiteur</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <!-- En-tête -->
+        <header class="header">
+            <div class="header-left">
+                <img id="logo" src="logo-maxime-h.svg" alt="Traiteur Maxime" class="logo" onerror="this.style.display='none'">
+            </div>
+            <div class="header-center">
+                <div id="current-time" class="time"></div>
+                <div id="current-date" class="date"></div>
+                <div id="status" class="status"></div>
+            </div>
+            <div class="header-right">
+                <div id="weather" class="weather-widget">
+                    <div class="weather-header">
+                        <div class="weather-location">📍 Bruxelles</div>
+                        <div class="weather-main">
+                            <div class="weather-icon-container">
+                                <span class="weather-icon">☀️</span>
+                            </div>
+                            <div class="weather-info">
+                                <div class="weather-temp">20°</div>
+                                <div class="weather-condition">Ensoleillé</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="weather-hourly">
+                        <div class="hourly-item">
+                            <div class="hourly-time">14h</div>
+                            <div class="hourly-icon">☀️</div>
+                            <div class="hourly-temp">20°</div>
+                        </div>
+                        <div class="hourly-item">
+                            <div class="hourly-time">15h</div>
+                            <div class="hourly-icon">🌤️</div>
+                            <div class="hourly-temp">21°</div>
+                        </div>
+                        <div class="hourly-item">
+                            <div class="hourly-time">16h</div>
+                            <div class="hourly-icon">⛅</div>
+                            <div class="hourly-temp">19°</div>
+                        </div>
+                        <div class="hourly-item">
+                            <div class="hourly-time">17h</div>
+                            <div class="hourly-icon">☁️</div>
+                            <div class="hourly-temp">18°</div>
+                        </div>
+                    </div>
+                    <div class="weather-daily">
+                        <div class="daily-item">
+                            <div class="daily-day">Lun</div>
+                            <div class="daily-icon">☀️</div>
+                            <div class="daily-temps">
+                                <span class="daily-min">12°</span>
+                                <span class="daily-max">22°</span>
+                            </div>
+                        </div>
+                        <div class="daily-item">
+                            <div class="daily-day">Mar</div>
+                            <div class="daily-icon">🌤️</div>
+                            <div class="daily-temps">
+                                <span class="daily-min">13°</span>
+                                <span class="daily-max">21°</span>
+                            </div>
+                        </div>
+                        <div class="daily-item">
+                            <div class="daily-day">Mer</div>
+                            <div class="daily-icon">⛅</div>
+                            <div class="daily-temps">
+                                <span class="daily-min">11°</span>
+                                <span class="daily-max">19°</span>
+                            </div>
+                        </div>
+                        <div class="daily-item">
+                            <div class="daily-day">Jeu</div>
+                            <div class="daily-icon">🌧️</div>
+                            <div class="daily-temps">
+                                <span class="daily-min">10°</span>
+                                <span class="daily-max">16°</span>
+                            </div>
+                        </div>
+                        <div class="daily-item">
+                            <div class="daily-day">Ven</div>
+                            <div class="daily-icon">☁️</div>
+                            <div class="daily-temps">
+                                <span class="daily-min">11°</span>
+                                <span class="daily-max">18°</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- Zone centrale - Grille des plats -->
+        <main class="main-content">
+            <div id="plats-grid" class="plats-grid">
+                <!-- Les plats seront insérés ici par JavaScript -->
+            </div>
+        </main>
+
+        <!-- Pied de page -->
+        <footer class="footer">
+            <div class="marquee-container">
+                <div id="marquee" class="marquee">
+                    <!-- Messages défilants insérés par JavaScript -->
+                </div>
+            </div>
+            <div class="footer-info">
+                <span id="week-info" class="week-info"></span>
+                <span id="contact-info" class="contact-info"></span>
+            </div>
+        </footer>
+    </div>
+
+    <!-- Indicateur hors ligne -->
+    <div id="offline-indicator" class="offline-indicator" style="display: none;">
+        📡 Mode hors ligne
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

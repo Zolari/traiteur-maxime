@@ -1,0 +1,257 @@
+{
+  "affichage": {
+    "type": "3",
+    "bgColor": "#ffffff"
+  },
+  "restaurant": {
+    "nom": "Traiteur Maxime",
+    "logo": "assets/logo.png",
+    "telephone": "+32 2 123 45 67",
+    "email": "contact@traiteurmaxime.be"
+  },
+  "semaine": {
+    "debut": "2025-10-07",
+    "fin": "2025-10-13",
+    "numero": 41
+  },
+  "plats": [
+    {
+      "id": 1,
+      "nom": "Oui, j'ai tout fait moi-même : Le poisson",
+      "description": "Rouget poêlé, purée de potimarron Bio et Local à la châtaigne et au romarin du jardin, carotte colorée BIO, sauce à l’orange\n\n",
+      "prix": 17.9,
+      "categorie": "plat",
+      "tags": [],
+      "allergenes": [],
+      "bgColor": "#ffffff",
+      "nouveau": false,
+      "epuise": false,
+      "image": "",
+      "colonne": 1
+    },
+    {
+      "id": 2,
+      "nom": "Le classique",
+      "description": "La véritable tartiflette au reblochon de Savoie, pommes de terre, chardonnay, lardons et oignons",
+      "prix": 14.9,
+      "categorie": "plat",
+      "tags": [],
+      "allergenes": [],
+      "bgColor": "#ffffff",
+      "nouveau": false,
+      "epuise": false,
+      "image": "",
+      "colonne": 1
+    },
+    {
+      "id": 3,
+      "nom": "Pasta lovers : La pâte",
+      "description": "Cannelloni de veau, tomates cerises, mozzarella",
+      "prix": 13.9,
+      "categorie": "plat",
+      "tags": [],
+      "allergenes": [],
+      "bgColor": "#ffffff",
+      "nouveau": false,
+      "epuise": false,
+      "image": "",
+      "colonne": 1
+    },
+    {
+      "id": 4,
+      "nom": "Oui, j'ai tout fait moi-même : Le plat végé",
+      "description": "Risotto au taleggio, potimarron BIO et LOCAL, noisettes, romarin du jardin\n",
+      "prix": 15.9,
+      "categorie": "plat",
+      "tags": [],
+      "allergenes": [],
+      "bgColor": "#ffffff",
+      "nouveau": false,
+      "epuise": false,
+      "image": "",
+      "colonne": 1
+    },
+    {
+      "id": 5,
+      "nom": "Oui, j'ai tout fait moi-même : Le poisson",
+      "description": "Rouget poêlé, purée de potimarron Bio et Local à la châtaigne et au romarin du jardin, carotte colorée BIO, sauce à l’orange\n\n",
+      "prix": 17.9,
+      "categorie": "plat",
+      "tags": [],
+      "allergenes": [],
+      "bgColor": "#ffffff",
+      "nouveau": false,
+      "epuise": false,
+      "image": "",
+      "colonne": 1
+    },
+    {
+      "id": 6,
+      "nom": "Oui, j'ai tout fait moi-même : Le poisson",
+      "description": "Rouget poêlé, purée de potimarron Bio et Local à la châtaigne et au romarin du jardin, carotte colorée BIO, sauce à l’orange",
+      "prix": 17.9,
+      "categorie": "plat",
+      "tags": [],
+      "allergenes": [],
+      "bgColor": "#ffffff",
+      "nouveau": false,
+      "epuise": false,
+      "image": "",
+      "colonne": 1
+    },
+    {
+      "id": 7,
+      "nom": "Le classique",
+      "description": "La véritable tartiflette au reblochon de Savoie, pommes de terre, chardonnay, lardons et oignons",
+      "prix": 14.9,
+      "categorie": "plat",
+      "tags": [],
+      "allergenes": [],
+      "bgColor": "#ffffff",
+      "nouveau": false,
+      "epuise": false,
+      "image": "",
+      "colonne": 2
+    },
+    {
+      "id": 8,
+      "nom": "Oui, j'ai tout fait moi-même : Le poisson",
+      "description": "Rouget poêlé, purée de potimarron Bio et Local à la châtaigne et au romarin du jardin, carotte colorée BIO, sauce à l’orange\n\n",
+      "prix": 17.9,
+      "categorie": "plat",
+      "tags": [],
+      "allergenes": [],
+      "bgColor": "#ffffff",
+      "nouveau": false,
+      "epuise": false,
+      "image": "",
+      "colonne": 2
+    },
+    {
+      "id": 9,
+      "nom": "Pasta lovers : La pâte",
+      "description": "Cannelloni de veau, tomates cerises, mozzarella",
+      "prix": 13.9,
+      "categorie": "plat",
+      "tags": [],
+      "allergenes": [],
+      "bgColor": "#ffffff",
+      "nouveau": false,
+      "epuise": false,
+      "image": "",
+      "colonne": 2
+    },
+    {
+      "id": 10,
+      "nom": "Le classique",
+      "description": "La véritable tartiflette au reblochon de Savoie, pommes de terre, chardonnay, lardons et oignons",
+      "prix": 14.9,
+      "categorie": "plat",
+      "tags": [],
+      "allergenes": [],
+      "bgColor": "#ffffff",
+      "nouveau": false,
+      "epuise": false,
+      "image": "",
+      "colonne": 3
+    },
+    {
+      "id": 11,
+      "nom": "Oui, j'ai tout fait moi-même : Le poisson",
+      "description": "Rouget poêlé, purée de potimarron Bio et Local à la châtaigne et au romarin du jardin, carotte colorée BIO, sauce à l’orange\n\n",
+      "prix": 17.9,
+      "categorie": "plat",
+      "tags": [],
+      "allergenes": [],
+      "bgColor": "#ffffff",
+      "nouveau": false,
+      "epuise": false,
+      "image": "",
+      "colonne": 3
+    },
+    {
+      "id": 12,
+      "nom": "Oui, j'ai tout fait moi-même : Le poisson",
+      "description": "Rouget poêlé, purée de potimarron Bio et Local à la châtaigne et au romarin du jardin, carotte colorée BIO, sauce à l’orange\n\n",
+      "prix": 17.9,
+      "categorie": "plat",
+      "tags": [],
+      "allergenes": [],
+      "bgColor": "#ffffff",
+      "nouveau": false,
+      "epuise": false,
+      "image": "",
+      "colonne": 3
+    },
+    {
+      "id": 13,
+      "nom": "Grand Sandwich",
+      "description": "1/2 Baguette",
+      "prix": 2,
+      "categorie": "plat",
+      "tags": [],
+      "allergenes": [],
+      "image": "",
+      "bgColor": "#ffffff",
+      "colonne": 4,
+      "nouveau": false,
+      "epuise": false
+    },
+    {
+      "id": 14,
+      "nom": "Crudités",
+      "description": "Salade, tomates, oignons, etc.",
+      "prix": 1,
+      "categorie": "plat",
+      "tags": [],
+      "allergenes": [],
+      "image": "",
+      "bgColor": "#ffffff",
+      "colonne": 4,
+      "nouveau": false,
+      "epuise": false
+    }
+  ],
+  "messages": [
+    {
+      "texte": "📱 Commandez par SMS au +32 2 123 45 67",
+      "priorite": "haute"
+    },
+    {
+      "texte": "🚚 Livraison gratuite dès 30€",
+      "priorite": "normale"
+    },
+    {
+      "texte": "⏰ Commandez avant 10h pour le midi",
+      "priorite": "normale"
+    }
+  ],
+  "horaires": {
+    "lundi": {
+      "ouverture": "11:30",
+      "fermeture": "14:30"
+    },
+    "mardi": {
+      "ouverture": "11:30",
+      "fermeture": "14:30"
+    },
+    "mercredi": {
+      "ouverture": "11:30",
+      "fermeture": "14:30"
+    },
+    "jeudi": {
+      "ouverture": "11:30",
+      "fermeture": "14:30"
+    },
+    "vendredi": {
+      "ouverture": "11:30",
+      "fermeture": "14:30"
+    },
+    "samedi": {
+      "ferme": true
+    },
+    "dimanche": {
+      "ferme": true
+    }
+  }
+}
