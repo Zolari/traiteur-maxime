@@ -1,7 +1,13 @@
 {
   "affichage": {
     "type": "3",
-    "bgColor": "#ffffff"
+    "bgColor": "#ffffff",
+    "bgImage": "images/back.jpg",
+    "glassmorphism": true,
+    "glassmorphismTheme": "dark",
+    "glassmorphismOpacity": 0.1,
+    "bgOpacity": 0.95,
+    "priceColor": "#359e34"
   },
   "restaurant": {
     "nom": "Traiteur Maxime",
@@ -21,13 +27,15 @@
       "description": "Rouget poêlé, purée de potimarron Bio et Local à la châtaigne et au romarin du jardin, carotte colorée BIO, sauce à l’orange\n\n",
       "prix": 17.9,
       "categorie": "plat",
-      "tags": [],
+      "tags": [
+        "sans-gluten"
+      ],
       "allergenes": [],
       "bgColor": "#ffffff",
       "nouveau": false,
       "epuise": false,
-      "image": "",
-      "colonne": 1
+      "colonne": 1,
+      "image": ""
     },
     {
       "id": 2,
@@ -38,10 +46,10 @@
       "tags": [],
       "allergenes": [],
       "bgColor": "#ffffff",
-      "nouveau": false,
+      "nouveau": true,
       "epuise": false,
-      "image": "",
-      "colonne": 1
+      "colonne": 1,
+      "image": ""
     },
     {
       "id": 3,
@@ -49,13 +57,15 @@
       "description": "Cannelloni de veau, tomates cerises, mozzarella",
       "prix": 13.9,
       "categorie": "plat",
-      "tags": [],
+      "tags": [
+        "sans-gluten"
+      ],
       "allergenes": [],
       "bgColor": "#ffffff",
       "nouveau": false,
       "epuise": false,
-      "image": "",
-      "colonne": 1
+      "colonne": 1,
+      "image": ""
     },
     {
       "id": 4,
@@ -63,13 +73,16 @@
       "description": "Risotto au taleggio, potimarron BIO et LOCAL, noisettes, romarin du jardin\n",
       "prix": 15.9,
       "categorie": "plat",
-      "tags": [],
+      "tags": [
+        "vegetarien",
+        "sans-gluten"
+      ],
       "allergenes": [],
       "bgColor": "#ffffff",
-      "nouveau": false,
-      "epuise": false,
-      "image": "",
-      "colonne": 1
+      "nouveau": true,
+      "epuise": true,
+      "colonne": 1,
+      "image": ""
     },
     {
       "id": 5,
@@ -80,10 +93,10 @@
       "tags": [],
       "allergenes": [],
       "bgColor": "#ffffff",
-      "nouveau": false,
+      "nouveau": true,
       "epuise": false,
-      "image": "",
-      "colonne": 1
+      "colonne": 1,
+      "image": ""
     },
     {
       "id": 6,
@@ -94,10 +107,10 @@
       "tags": [],
       "allergenes": [],
       "bgColor": "#ffffff",
-      "nouveau": false,
+      "nouveau": true,
       "epuise": false,
-      "image": "",
-      "colonne": 1
+      "colonne": 1,
+      "image": ""
     },
     {
       "id": 7,
@@ -105,13 +118,15 @@
       "description": "La véritable tartiflette au reblochon de Savoie, pommes de terre, chardonnay, lardons et oignons",
       "prix": 14.9,
       "categorie": "plat",
-      "tags": [],
+      "tags": [
+        "sans-gluten"
+      ],
       "allergenes": [],
       "bgColor": "#ffffff",
       "nouveau": false,
       "epuise": false,
-      "image": "",
-      "colonne": 2
+      "colonne": 2,
+      "image": ""
     },
     {
       "id": 8,
@@ -119,13 +134,15 @@
       "description": "Rouget poêlé, purée de potimarron Bio et Local à la châtaigne et au romarin du jardin, carotte colorée BIO, sauce à l’orange\n\n",
       "prix": 17.9,
       "categorie": "plat",
-      "tags": [],
+      "tags": [
+        "sans-gluten"
+      ],
       "allergenes": [],
       "bgColor": "#ffffff",
       "nouveau": false,
       "epuise": false,
-      "image": "",
-      "colonne": 2
+      "colonne": 2,
+      "image": ""
     },
     {
       "id": 9,
@@ -133,13 +150,15 @@
       "description": "Cannelloni de veau, tomates cerises, mozzarella",
       "prix": 13.9,
       "categorie": "plat",
-      "tags": [],
+      "tags": [
+        "sans-gluten"
+      ],
       "allergenes": [],
       "bgColor": "#ffffff",
       "nouveau": false,
       "epuise": false,
-      "image": "",
-      "colonne": 2
+      "colonne": 2,
+      "image": ""
     },
     {
       "id": 10,
@@ -147,13 +166,15 @@
       "description": "La véritable tartiflette au reblochon de Savoie, pommes de terre, chardonnay, lardons et oignons",
       "prix": 14.9,
       "categorie": "plat",
-      "tags": [],
+      "tags": [
+        "sans-gluten"
+      ],
       "allergenes": [],
       "bgColor": "#ffffff",
       "nouveau": false,
       "epuise": false,
-      "image": "",
-      "colonne": 3
+      "colonne": 3,
+      "image": ""
     },
     {
       "id": 11,
@@ -161,13 +182,15 @@
       "description": "Rouget poêlé, purée de potimarron Bio et Local à la châtaigne et au romarin du jardin, carotte colorée BIO, sauce à l’orange\n\n",
       "prix": 17.9,
       "categorie": "plat",
-      "tags": [],
+      "tags": [
+        "sans-gluten"
+      ],
       "allergenes": [],
       "bgColor": "#ffffff",
       "nouveau": false,
       "epuise": false,
-      "image": "",
-      "colonne": 3
+      "colonne": 3,
+      "image": ""
     },
     {
       "id": 12,
@@ -175,13 +198,15 @@
       "description": "Rouget poêlé, purée de potimarron Bio et Local à la châtaigne et au romarin du jardin, carotte colorée BIO, sauce à l’orange\n\n",
       "prix": 17.9,
       "categorie": "plat",
-      "tags": [],
+      "tags": [
+        "sans-gluten"
+      ],
       "allergenes": [],
       "bgColor": "#ffffff",
       "nouveau": false,
       "epuise": false,
-      "image": "",
-      "colonne": 3
+      "colonne": 3,
+      "image": ""
     },
     {
       "id": 13,
@@ -191,11 +216,11 @@
       "categorie": "plat",
       "tags": [],
       "allergenes": [],
-      "image": "",
       "bgColor": "#ffffff",
       "colonne": 4,
       "nouveau": false,
-      "epuise": false
+      "epuise": false,
+      "image": ""
     },
     {
       "id": 14,
@@ -205,11 +230,11 @@
       "categorie": "plat",
       "tags": [],
       "allergenes": [],
-      "image": "",
       "bgColor": "#ffffff",
       "colonne": 4,
       "nouveau": false,
-      "epuise": false
+      "epuise": false,
+      "image": ""
     }
   ],
   "messages": [

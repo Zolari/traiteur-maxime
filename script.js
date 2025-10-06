@@ -36,10 +36,68 @@ async function initApp() {
             updateStatus();
             startAutoplay();
             loadWeather();
+            applyBackgroundColor();
+            applyPriceColor();
         }
     } catch (error) {
         console.error('Erreur lors de l\'initialisation:', error);
         loadCachedMenu();
+    }
+}
+
+// Appliquer la couleur ou image de fond depuis menu.json
+function applyBackgroundColor() {
+    if (menuData && menuData.affichage) {
+        // Si une image de fond est définie, l'utiliser en priorité
+        if (menuData.affichage.bgImage) {
+            console.log('Application de l\'image de fond:', menuData.affichage.bgImage);
+
+            // Créer ou mettre à jour une règle CSS pour body::before
+            const bgOpacity = menuData.affichage.bgOpacity !== undefined ? menuData.affichage.bgOpacity : 1.00;
+
+            // Chercher si une règle existe déjà
+            let styleSheet = document.getElementById('dynamic-bg-style');
+            if (!styleSheet) {
+                styleSheet = document.createElement('style');
+                styleSheet.id = 'dynamic-bg-style';
+                document.head.appendChild(styleSheet);
+            }
+
+            styleSheet.textContent = `
+                body::before {
+                    background-image: url('${menuData.affichage.bgImage}');
+                    opacity: ${bgOpacity};
+                }
+            `;
+
+            // Couleur de fond comme fallback
+            if (menuData.affichage.bgColor) {
+                document.body.style.backgroundColor = menuData.affichage.bgColor;
+            }
+            console.log('Style appliqué avec opacité:', bgOpacity);
+        }
+        // Sinon utiliser la couleur uniquement
+        else if (menuData.affichage.bgColor) {
+            console.log('Application de la couleur de fond:', menuData.affichage.bgColor);
+            // Supprimer l'image de fond du pseudo-élément
+            let styleSheet = document.getElementById('dynamic-bg-style');
+            if (styleSheet) {
+                styleSheet.textContent = `
+                    body::before {
+                        background-image: none;
+                    }
+                `;
+            }
+            document.body.style.backgroundColor = menuData.affichage.bgColor;
+        }
+    }
+}
+
+// Appliquer la couleur des prix depuis menu.json
+function applyPriceColor() {
+    if (menuData && menuData.affichage && menuData.affichage.priceColor) {
+        document.documentElement.style.setProperty('--price-color', menuData.affichage.priceColor);
+        console.log('Couleur des prix appliquée:', menuData.affichage.priceColor);
     }
 }
 
@@ -71,6 +129,8 @@ function loadCachedMenu() {
         updateFooterInfo();
         updateStatus();
         startAutoplay();
+        applyBackgroundColor();
+        applyPriceColor();
         showOfflineIndicator();
     }
 }
@@ -141,12 +201,31 @@ function renderAffichage3() {
     const container = document.createElement('div');
     container.className = 'sandwich-container';
 
+    // Appliquer l'opacité du glassmorphism si définie
+    if (menuData.affichage?.glassmorphism && menuData.affichage?.glassmorphismOpacity !== undefined) {
+        container.style.setProperty('--glassmorphism-opacity', menuData.affichage.glassmorphismOpacity);
+    }
+
     // Ligne 1 : Header (logo, date/heure, météo)
     const header = document.createElement('div');
     header.className = 'sandwich-header';
+
+    // Déterminer le logo à utiliser selon le thème glassmorphism
+    let logoSrc = 'logo-maxime-h.svg'; // Logo normal par défaut
+    if (menuData.affichage?.glassmorphism) {
+        const theme = menuData.affichage.glassmorphismTheme || 'dark';
+        header.classList.add('glassmorphism');
+        if (theme === 'light') {
+            header.classList.add('glassmorphism-light');
+        } else {
+            // Thème dark = logo blanc
+            logoSrc = 'logo-maxime-w.svg';
+        }
+    }
+
     header.innerHTML = `
         <div class="sandwich-header-left">
-            <img src="logo-maxime-h.svg" alt="Logo" class="sandwich-logo" onerror="this.style.display='none'">
+            <img src="${logoSrc}" alt="Logo" class="sandwich-logo" onerror="this.style.display='none'">
         </div>
         <div class="sandwich-header-center">
             <div id="sandwich-time" class="sandwich-time"></div>
@@ -193,6 +272,13 @@ function renderAffichage3() {
         const section = sections[sectionIndex];
         const column = document.createElement('div');
         column.className = 'sandwich-column';
+        if (menuData.affichage?.glassmorphism) {
+            const theme = menuData.affichage.glassmorphismTheme || 'dark';
+            column.classList.add('glassmorphism');
+            if (theme === 'light') {
+                column.classList.add('glassmorphism-light');
+            }
+        }
 
         const columnTitle = document.createElement('h2');
         columnTitle.className = 'sandwich-column-title';
@@ -210,6 +296,13 @@ function renderAffichage3() {
     // Créer la colonne 3 avec 2 sections (Desserts + Extras)
     const column3 = document.createElement('div');
     column3.className = 'sandwich-column sandwich-column-split';
+    if (menuData.affichage?.glassmorphism) {
+        const theme = menuData.affichage.glassmorphismTheme || 'dark';
+        column3.classList.add('glassmorphism');
+        if (theme === 'light') {
+            column3.classList.add('glassmorphism-light');
+        }
+    }
 
     // Section Desserts
     const dessertsSection = document.createElement('div');
@@ -237,7 +330,7 @@ function renderAffichage3() {
     extrasSection.appendChild(extrasTitle);
 
     sections[3].plats.forEach(plat => {
-        const item = createSandwichItem(plat);
+        const item = createSandwichItem(plat, true); // true = isExtra, affiche le "+"
         extrasSection.appendChild(item);
     });
 
@@ -249,6 +342,13 @@ function renderAffichage3() {
     // Ligne 3 : Footer (infos)
     const footer = document.createElement('div');
     footer.className = 'sandwich-footer';
+    if (menuData.affichage?.glassmorphism) {
+        const theme = menuData.affichage.glassmorphismTheme || 'dark';
+        footer.classList.add('glassmorphism');
+        if (theme === 'light') {
+            footer.classList.add('glassmorphism-light');
+        }
+    }
 
     // Formater les dates pour le footer
     const dateDebut = menuData.semaine?.debut ? formatDate(menuData.semaine.debut) : '';
@@ -270,7 +370,7 @@ function renderAffichage3() {
 }
 
 // Créer un item sandwich (utilisé dans l'affichage 3)
-function createSandwichItem(plat) {
+function createSandwichItem(plat, isExtra = false) {
     const item = document.createElement('div');
     item.className = 'sandwich-item';
 
@@ -279,13 +379,32 @@ function createSandwichItem(plat) {
         ? `<img src="${plat.image}" alt="${plat.nom}" class="sandwich-item-image" onerror="this.src=''; this.classList.add('error')">`
         : '<div class="sandwich-item-image-placeholder">🍽️</div>';
 
+    // Prix avec "+" pour les extras (colonne 4)
+    const pricePrefix = isExtra ? '+' : '';
+    const priceHTML = `${pricePrefix}${plat.prix.toFixed(2)} €`;
+
+    // Badges/icônes pour tags
+    let badgesHTML = '';
+    if (plat.tags && plat.tags.includes('vegetarien')) {
+        badgesHTML += '<span class="item-badge badge-veggie">🌱</span>';
+    }
+    if (plat.tags && plat.tags.includes('sans-gluten')) {
+        badgesHTML += '<span class="item-badge badge-gluten-free">Ⓖ</span>';
+    }
+    if (plat.nouveau) {
+        badgesHTML += '<span class="item-badge badge-new">★</span>';
+    }
+
     item.innerHTML = `
         ${imageHTML}
         <div class="sandwich-item-content">
-            <div class="sandwich-item-name">${plat.nom}</div>
+            <div class="sandwich-item-name">
+                ${plat.nom}
+                ${badgesHTML}
+            </div>
             <div class="sandwich-item-description">${plat.description || ''}</div>
         </div>
-        <div class="sandwich-item-price">${plat.prix.toFixed(2)} €</div>
+        <div class="sandwich-item-price">${priceHTML}</div>
     `;
 
     return item;

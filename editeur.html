@@ -366,6 +366,61 @@
                             <option value="3">Affichage 3 - Sandwich (3 colonnes avec liste)</option>
                         </select>
                     </div>
+                    <div class="form-group">
+                        <label>Image de fond de la page</label>
+                        <input type="text" id="affichage-bgimage" value="" placeholder="Ex: images/background.jpg">
+                        <small style="color: #6c757d; font-size: 0.85rem; margin-top: 0.25rem; display: block;">
+                            ℹ️ Entrez le chemin de votre image de fond (mode cover). Laissez vide pour utiliser la couleur ci-dessous.
+                        </small>
+                    </div>
+                    <div class="form-group">
+                        <label>Opacité de l'image de fond : <span id="bg-opacity-value">1.00</span></label>
+                        <input type="range" id="affichage-bgopacity" min="0" max="1" step="0.01" value="1.00"
+                               oninput="document.getElementById('bg-opacity-value').textContent = this.value">
+                        <small style="color: #6c757d; font-size: 0.85rem; margin-top: 0.25rem; display: block;">
+                            ℹ️ Ajustez la transparence de l'image de fond (0 = transparent, 1 = opaque)
+                        </small>
+                    </div>
+                    <div class="form-group">
+                        <label>Couleur de fond (si pas d'image)</label>
+                        <input type="color" id="affichage-bgcolor" value="#f8f9fa">
+                    </div>
+                    <div class="form-group">
+                        <label>Couleur des prix</label>
+                        <input type="color" id="affichage-pricecolor" value="#359E34">
+                        <small style="color: #6c757d; font-size: 0.85rem; margin-top: 0.25rem; display: block;">
+                            ℹ️ Couleur d'affichage des prix dans les menus
+                        </small>
+                    </div>
+                    <div class="form-group">
+                        <div class="checkbox-group">
+                            <label>
+                                <input type="checkbox" id="affichage-glassmorphism">
+                                Activer l'effet Glassmorphism (iOS)
+                            </label>
+                        </div>
+                        <small style="color: #6c757d; font-size: 0.85rem; margin-top: 0.25rem; display: block;">
+                            ℹ️ Applique une transparence avec flou sur le header, les colonnes et le footer (nécessite une image de fond)
+                        </small>
+                    </div>
+                    <div class="form-group">
+                        <label>Type de fond (pour Glassmorphism)</label>
+                        <select id="affichage-glassmorphism-theme">
+                            <option value="dark">Fond foncé (textes blancs)</option>
+                            <option value="light">Fond clair (textes noirs)</option>
+                        </select>
+                        <small style="color: #6c757d; font-size: 0.85rem; margin-top: 0.25rem; display: block;">
+                            ℹ️ Choisissez le thème selon la luminosité de votre image de fond
+                        </small>
+                    </div>
+                    <div class="form-group">
+                        <label>Opacité du Glassmorphism : <span id="opacity-value">0.10</span></label>
+                        <input type="range" id="affichage-glassmorphism-opacity" min="0" max="1" step="0.01" value="0.10"
+                               oninput="document.getElementById('opacity-value').textContent = this.value">
+                        <small style="color: #6c757d; font-size: 0.85rem; margin-top: 0.25rem; display: block;">
+                            ℹ️ Ajustez la transparence du fond (0 = transparent, 1 = opaque)
+                        </small>
+                    </div>
                 </div>
 
                 <!-- Informations de la semaine -->

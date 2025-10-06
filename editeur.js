@@ -2,7 +2,13 @@
 let menuData = {
     affichage: {
         type: "1",
-        bgColor: "#ffffff"
+        bgColor: "#f8f9fa",
+        bgImage: "",
+        bgOpacity: 1.00,
+        priceColor: "#359E34",
+        glassmorphism: false,
+        glassmorphismTheme: "dark",
+        glassmorphismOpacity: 0.10
     },
     restaurant: {
         nom: "Traiteur Maxime",
@@ -490,6 +496,17 @@ function loadFormData() {
     // Affichage
     if (menuData.affichage) {
         document.getElementById('affichage-type').value = menuData.affichage.type || "1";
+        document.getElementById('affichage-bgcolor').value = menuData.affichage.bgColor || "#f8f9fa";
+        document.getElementById('affichage-bgimage').value = menuData.affichage.bgImage || "";
+        const bgOpacity = menuData.affichage.bgOpacity !== undefined ? menuData.affichage.bgOpacity : 1.00;
+        document.getElementById('affichage-bgopacity').value = bgOpacity;
+        document.getElementById('bg-opacity-value').textContent = bgOpacity.toFixed(2);
+        document.getElementById('affichage-pricecolor').value = menuData.affichage.priceColor || "#359E34";
+        document.getElementById('affichage-glassmorphism').checked = menuData.affichage.glassmorphism || false;
+        document.getElementById('affichage-glassmorphism-theme').value = menuData.affichage.glassmorphismTheme || "dark";
+        const opacity = menuData.affichage.glassmorphismOpacity || 0.10;
+        document.getElementById('affichage-glassmorphism-opacity').value = opacity;
+        document.getElementById('opacity-value').textContent = opacity;
     }
 
     // Restaurant
@@ -516,6 +533,13 @@ function collectFormData() {
     // Affichage
     if (!menuData.affichage) menuData.affichage = {};
     menuData.affichage.type = document.getElementById('affichage-type').value;
+    menuData.affichage.bgColor = document.getElementById('affichage-bgcolor').value;
+    menuData.affichage.bgImage = document.getElementById('affichage-bgimage').value;
+    menuData.affichage.bgOpacity = parseFloat(document.getElementById('affichage-bgopacity').value);
+    menuData.affichage.priceColor = document.getElementById('affichage-pricecolor').value;
+    menuData.affichage.glassmorphism = document.getElementById('affichage-glassmorphism').checked;
+    menuData.affichage.glassmorphismTheme = document.getElementById('affichage-glassmorphism-theme').value;
+    menuData.affichage.glassmorphismOpacity = parseFloat(document.getElementById('affichage-glassmorphism-opacity').value);
 
     // Informations du restaurant
     menuData.restaurant.nom = document.getElementById('restaurant-nom').value;
