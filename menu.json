@@ -238,16 +238,7 @@
       "image": ""
     }
   ],
-  "messages": [
-    {
-      "texte": "🚚 Livraison gratuite dès 30€",
-      "priorite": "normale"
-    },
-    {
-      "texte": "⏰ Commandez avant 10h pour le midi",
-      "priorite": "normale"
-    }
-  ],
+  "messages": [],
   "horaires": {
     "lundi": {
       "ouverture": "11:30",
