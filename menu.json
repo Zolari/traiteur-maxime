@@ -1,17 +1,18 @@
 {
+  "version": "1.1.4",
   "affichage": {
     "type": "3",
     "bgColor": "#ffffff",
     "bgImage": "images/back.jpg",
     "glassmorphism": true,
     "glassmorphismTheme": "dark",
-    "glassmorphismOpacity": 0.1,
+    "glassmorphismOpacity": 0.3,
     "bgOpacity": 0.95,
     "priceColor": "#359e34"
   },
   "restaurant": {
     "nom": "Traiteur Maxime",
-    "logo": "assets/logo.png",
+    "logo": "logo-maxime-h.svg",
     "telephone": "+32 2 123 45 67",
     "email": "contact@traiteurmaxime.be"
   },
@@ -23,7 +24,7 @@
   "plats": [
     {
       "id": 1,
-      "nom": "Oui, j'ai tout fait moi-même : Le poisson",
+      "nom": "Le poisson",
       "description": "Rouget poêlé, purée de potimarron Bio et Local à la châtaigne et au romarin du jardin, carotte colorée BIO, sauce à l’orange\n\n",
       "prix": 17.9,
       "categorie": "plat",
@@ -53,7 +54,7 @@
     },
     {
       "id": 3,
-      "nom": "Pasta lovers : La pâte",
+      "nom": "La pâte",
       "description": "Cannelloni de veau, tomates cerises, mozzarella",
       "prix": 13.9,
       "categorie": "plat",
@@ -69,7 +70,7 @@
     },
     {
       "id": 4,
-      "nom": "Oui, j'ai tout fait moi-même : Le plat végé",
+      "nom": "Le plat végé",
       "description": "Risotto au taleggio, potimarron BIO et LOCAL, noisettes, romarin du jardin\n",
       "prix": 15.9,
       "categorie": "plat",
@@ -86,7 +87,7 @@
     },
     {
       "id": 5,
-      "nom": "Oui, j'ai tout fait moi-même : Le poisson",
+      "nom": "Le poisson",
       "description": "Rouget poêlé, purée de potimarron Bio et Local à la châtaigne et au romarin du jardin, carotte colorée BIO, sauce à l’orange\n\n",
       "prix": 17.9,
       "categorie": "plat",
@@ -100,7 +101,7 @@
     },
     {
       "id": 6,
-      "nom": "Oui, j'ai tout fait moi-même : Le poisson",
+      "nom": "Le poisson",
       "description": "Rouget poêlé, purée de potimarron Bio et Local à la châtaigne et au romarin du jardin, carotte colorée BIO, sauce à l’orange",
       "prix": 17.9,
       "categorie": "plat",
@@ -130,7 +131,7 @@
     },
     {
       "id": 8,
-      "nom": "Oui, j'ai tout fait moi-même : Le poisson",
+      "nom": "Le poisson",
       "description": "Rouget poêlé, purée de potimarron Bio et Local à la châtaigne et au romarin du jardin, carotte colorée BIO, sauce à l’orange\n\n",
       "prix": 17.9,
       "categorie": "plat",
@@ -146,7 +147,7 @@
     },
     {
       "id": 9,
-      "nom": "Pasta lovers : La pâte",
+      "nom": "La pâte",
       "description": "Cannelloni de veau, tomates cerises, mozzarella",
       "prix": 13.9,
       "categorie": "plat",
@@ -178,7 +179,7 @@
     },
     {
       "id": 11,
-      "nom": "Oui, j'ai tout fait moi-même : Le poisson",
+      "nom": "Le poisson",
       "description": "Rouget poêlé, purée de potimarron Bio et Local à la châtaigne et au romarin du jardin, carotte colorée BIO, sauce à l’orange\n\n",
       "prix": 17.9,
       "categorie": "plat",
@@ -194,7 +195,7 @@
     },
     {
       "id": 12,
-      "nom": "Oui, j'ai tout fait moi-même : Le poisson",
+      "nom": "Le poisson",
       "description": "Rouget poêlé, purée de potimarron Bio et Local à la châtaigne et au romarin du jardin, carotte colorée BIO, sauce à l’orange\n\n",
       "prix": 17.9,
       "categorie": "plat",
@@ -238,10 +239,6 @@
     }
   ],
   "messages": [
-    {
-      "texte": "📱 Commandez par SMS au +32 2 123 45 67",
-      "priorite": "haute"
-    },
     {
       "texte": "🚚 Livraison gratuite dès 30€",
       "priorite": "normale"
