@@ -104,17 +104,37 @@ function applyPriceColor() {
 // Chargement du menu
 async function loadMenu() {
     try {
-        const response = await fetch('menu.json');
+        // Ajouter un cache-busting pour toujours charger la dernière version
+        const cacheBuster = new Date().getTime();
+        const response = await fetch(`menu.json?v=${cacheBuster}`);
         if (!response.ok) throw new Error('Erreur de chargement du menu');
 
-        menuData = await response.json();
+        const newMenuData = await response.json();
 
-        // Cache en localStorage
+        // Vérifier si la version a changé
+        const cachedData = localStorage.getItem(CONFIG.MENU_CACHE_KEY);
+        if (cachedData) {
+            const cachedMenu = JSON.parse(cachedData);
+            const cachedVersion = cachedMenu.version || '0.0.0';
+            const newVersion = newMenuData.version || '0.0.0';
+
+            if (cachedVersion !== newVersion) {
+                console.log(`🔄 Nouvelle version détectée: ${cachedVersion} → ${newVersion}`);
+                console.log('🧹 Nettoyage du cache...');
+                localStorage.clear(); // Nettoyer tout le cache
+            }
+        }
+
+        menuData = newMenuData;
+
+        // Cache en localStorage avec la nouvelle version
         localStorage.setItem(CONFIG.MENU_CACHE_KEY, JSON.stringify(menuData));
+        console.log('✅ Menu chargé - Version:', menuData.version || 'non spécifiée');
+        console.log('📺 Type d\'affichage:', menuData.affichage?.type || '1');
 
         return menuData;
     } catch (error) {
-        console.error('Erreur:', error);
+        console.error('❌ Erreur de chargement:', error);
         throw error;
     }
 }
@@ -140,8 +160,8 @@ function renderMenu() {
     const grid = document.getElementById('plats-grid');
     if (!grid || !menuData || !menuData.plats) return;
 
-    // Détecter le type d'affichage
-    const affichageType = menuData.affichage?.type || "1";
+    // Détecter le type d'affichage (par défaut : affichage 3 = Sandwich)
+    const affichageType = menuData.affichage?.type || "3";
 
     // Ajouter classe au body pour gérer l'affichage
     document.body.className = `affichage-${affichageType}`;
@@ -359,7 +379,6 @@ function renderAffichage3() {
 
     footer.innerHTML = `
         <div class="sandwich-footer-content">
-            <span>${menuData.messages?.[0]?.texte || 'Bienvenue'}</span>
             <span>${semaineText}</span>
             <span>${menuData.restaurant?.email || ''}</span>
         </div>
@@ -783,7 +802,7 @@ function stopCarousel() {
 
 // Démarrer l'autoplay selon le type d'affichage
 function startAutoplay() {
-    const affichageType = menuData?.affichage?.type || "1";
+    const affichageType = menuData?.affichage?.type || "3";
 
     if (affichageType === "2") {
         stopRotation(); // Arrêter la rotation si elle était active
@@ -1128,3 +1147,56 @@ document.addEventListener('touchend', () => {
         initApp(); // Recharger les données
     }
 });
+
+// Rechargement forcé du menu (bouton manuel)
+function forceReloadMenu() {
+    console.log('🔄 Rechargement forcé du menu...');
+
+    // Nettoyer tout le cache
+    localStorage.clear();
+    console.log('🧹 Cache nettoyé');
+
+    // Afficher un feedback visuel
+    const btn = document.getElementById('reload-menu-btn');
+    if (btn) {
+        btn.textContent = '⏳';
+        btn.disabled = true;
+    }
+
+    // Recharger la page après un court délai
+    setTimeout(() => {
+        window.location.reload(true); // true = forcer le rechargement depuis le serveur
+    }, 500);
+}
+
+// Export du menu en PDF
+function exportToPDF() {
+    // Récupérer l'élément à exporter
+    const element = document.querySelector('.sandwich-container') || document.querySelector('.container');
+
+    if (!element) {
+        alert('Aucun contenu à exporter');
+        return;
+    }
+
+    // Configuration du PDF
+    const opt = {
+        margin: 10,
+        filename: `menu-semaine-${menuData?.semaine?.numero || 'actuel'}.pdf`,
+        image: { type: 'jpeg', quality: 0.98 },
+        html2canvas: {
+            scale: 2,
+            useCORS: true,
+            logging: false,
+            backgroundColor: '#ffffff'
+        },
+        jsPDF: {
+            unit: 'mm',
+            format: 'a4',
+            orientation: 'portrait'
+        }
+    };
+
+    // Générer le PDF
+    html2pdf().set(opt).from(element).save();
+}
