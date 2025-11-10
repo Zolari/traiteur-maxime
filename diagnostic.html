@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Diagnostic - Menu Digital</title>
+    <style>
+        body {
+            font-family: monospace;
+            padding: 20px;
+            background: #1a1a1a;
+            color: #00ff00;
+        }
+        .test-item {
+            margin: 10px 0;
+            padding: 10px;
+            border: 1px solid #333;
+            background: #2a2a2a;
+        }
+        .success { color: #00ff00; }
+        .error { color: #ff0000; }
+        .warning { color: #ffaa00; }
+        pre {
+            background: #000;
+            padding: 10px;
+            overflow-x: auto;
+        }
+        h2 {
+            color: #00aaff;
+        }
+    </style>
+</head>
+<body>
+    <h1>🔧 Diagnostic du Menu Digital</h1>
+
+    <div id="results"></div>
+
+    <script>
+        const results = document.getElementById('results');
+
+        function addResult(title, status, details) {
+            const div = document.createElement('div');
+            div.className = 'test-item';
+            div.innerHTML = `
+                <strong class="${status}">${status === 'success' ? '✅' : status === 'error' ? '❌' : '⚠️'} ${title}</strong>
+                ${details ? `<pre>${details}</pre>` : ''}
+            `;
+            results.appendChild(div);
+        }
+
+        async function runDiagnostics() {
+            addResult('Diagnostic démarré...', 'success', new Date().toLocaleString());
+
+            // Test 1: Chargement du menu.json
+            try {
+                const response = await fetch('menu.json?v=' + Date.now());
+                if (response.ok) {
+                    const data = await response.json();
+                    addResult('menu.json chargé', 'success',
+                        `Version: ${data.version}\n` +
+                        `Type affichage: ${data.affichage?.type}\n` +
+                        `Image de fond: ${data.affichage?.bgImage}\n` +
+                        `Glassmorphism: ${data.affichage?.glassmorphism}\n` +
+                        `Nombre de plats: ${data.plats?.length}`
+                    );
+
+                    // Test 2: Vérification de l'image de fond
+                    if (data.affichage?.bgImage) {
+                        const imgTest = new Image();
+                        imgTest.onload = () => {
+                            addResult('Image de fond chargée', 'success', data.affichage.bgImage);
+                        };
+                        imgTest.onerror = () => {
+                            addResult('Image de fond ERREUR', 'error',
+                                `Impossible de charger: ${data.affichage.bgImage}\n` +
+                                'Vérifiez que le fichier existe dans le dossier images/'
+                            );
+                        };
+                        imgTest.src = data.affichage.bgImage;
+                    }
+
+                    // Test 3: Vérification du logo
+                    if (data.restaurant?.logo) {
+                        const logoTest = new Image();
+                        logoTest.onload = () => {
+                            addResult('Logo chargé', 'success', data.restaurant.logo);
+                        };
+                        logoTest.onerror = () => {
+                            addResult('Logo ERREUR', 'error',
+                                `Impossible de charger: ${data.restaurant.logo}`
+                            );
+                        };
+                        logoTest.src = data.restaurant.logo;
+                    }
+
+                    // Test 4: Vérification du localStorage
+                    const cached = localStorage.getItem('menuData');
+                    if (cached) {
+                        const cachedData = JSON.parse(cached);
+                        addResult('Cache localStorage', 'warning',
+                            `Version en cache: ${cachedData.version}\n` +
+                            `Version actuelle: ${data.version}\n` +
+                            `${cachedData.version === data.version ? 'Versions identiques ✓' : 'VERSIONS DIFFÉRENTES ⚠️'}`
+                        );
+                    } else {
+                        addResult('Cache localStorage', 'success', 'Aucun cache (c\'est normal au premier chargement)');
+                    }
+
+                } else {
+                    addResult('menu.json ERREUR', 'error', `HTTP ${response.status}: ${response.statusText}`);
+                }
+            } catch (error) {
+                addResult('menu.json ERREUR FATALE', 'error', error.message);
+            }
+
+            // Test 5: Vérification des fichiers CSS et JS
+            const files = [
+                { name: 'style.css', type: 'text/css' },
+                { name: 'script.js', type: 'application/javascript' },
+                { name: 'logo-maxime-h.svg', type: 'image/svg+xml' },
+                { name: 'logo-maxime-w.svg', type: 'image/svg+xml' }
+            ];
+
+            for (const file of files) {
+                try {
+                    const response = await fetch(file.name);
+                    if (response.ok) {
+                        addResult(`${file.name} chargé`, 'success', `Taille: ${response.headers.get('content-length')} bytes`);
+                    } else {
+                        addResult(`${file.name} ERREUR`, 'error', `HTTP ${response.status}`);
+                    }
+                } catch (error) {
+                    addResult(`${file.name} ERREUR`, 'error', error.message);
+                }
+            }
+
+            // Test 6: Informations du navigateur
+            addResult('Informations du navigateur', 'success',
+                `User Agent: ${navigator.userAgent}\n` +
+                `En ligne: ${navigator.onLine ? 'Oui' : 'Non'}\n` +
+                `Langue: ${navigator.language}\n` +
+                `Résolution: ${window.screen.width}x${window.screen.height}\n` +
+                `Viewport: ${window.innerWidth}x${window.innerHeight}`
+            );
+
+            // Test 7: Vérifier si on peut nettoyer le cache
+            addResult('Actions disponibles', 'success',
+                'Pour forcer le rechargement:\n' +
+                '1. Ouvrir la console (F12)\n' +
+                '2. Taper: localStorage.clear()\n' +
+                '3. Recharger la page (F5)\n\n' +
+                'Ou cliquer sur le bouton 🔄 en bas à droite'
+            );
+        }
+
+        runDiagnostics();
+    </script>
+</body>
+</html>

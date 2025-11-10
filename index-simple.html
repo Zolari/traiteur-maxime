@@ -1,0 +1,657 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Menu Simple - Test ES5</title>
+    <link rel="stylesheet" href="style.css">
+
+    <!-- Styles forcés pour TV : toujours 3 colonnes -->
+    <style>
+        /* Container global */
+        .container {
+            width: 100vw !important;
+            max-width: 100vw !important;
+            overflow: hidden !important;
+            display: -webkit-box !important;
+            display: -webkit-flex !important;
+            display: -ms-flexbox !important;
+            display: flex !important;
+            -webkit-box-orient: vertical !important;
+            -webkit-box-direction: normal !important;
+            -webkit-flex-direction: column !important;
+            -ms-flex-direction: column !important;
+            flex-direction: column !important;
+            height: 100vh !important;
+        }
+
+        /* Main content prend le reste de l'espace */
+        .main-content {
+            -webkit-box-flex: 1 !important;
+            -webkit-flex: 1 !important;
+            -ms-flex: 1 !important;
+            flex: 1 !important;
+            overflow: hidden !important;
+            display: -webkit-box !important;
+            display: -webkit-flex !important;
+            display: -ms-flexbox !important;
+            display: flex !important;
+            -webkit-box-orient: vertical !important;
+            -webkit-box-direction: normal !important;
+            -webkit-flex-direction: column !important;
+            -ms-flex-direction: column !important;
+            flex-direction: column !important;
+        }
+
+        /* Plats-grid prend tout l'espace disponible */
+        .plats-grid {
+            -webkit-box-flex: 1 !important;
+            -webkit-flex: 1 !important;
+            -ms-flex: 1 !important;
+            flex: 1 !important;
+            overflow: hidden !important;
+        }
+
+        /* Forcer 3 colonnes avec FLEXBOX (compatible vieux navigateurs) */
+        .sandwich-body {
+            display: -webkit-box !important;
+            display: -webkit-flex !important;
+            display: -ms-flexbox !important;
+            display: flex !important;
+            -webkit-box-orient: horizontal !important;
+            -webkit-box-direction: normal !important;
+            -webkit-flex-direction: row !important;
+            -ms-flex-direction: row !important;
+            flex-direction: row !important;
+            width: 100% !important;
+            max-width: 100% !important;
+            box-sizing: border-box !important;
+            padding: 1rem !important;
+            margin: 0 !important;
+            gap: 1rem;
+        }
+
+        .sandwich-column {
+            -webkit-box-flex: 1 !important;
+            -webkit-flex: 1 1 33.33% !important;
+            -ms-flex: 1 1 33.33% !important;
+            flex: 1 1 33.33% !important;
+            width: 33.33% !important;
+            min-width: 0 !important;
+            max-width: 33.33% !important;
+            overflow-y: auto !important;
+            overflow-x: hidden !important;
+            box-sizing: border-box !important;
+            padding: 1.5rem !important;
+            margin: 0.5rem !important;
+        }
+
+        /* Empêcher les textes de déborder */
+        .sandwich-item-name,
+        .sandwich-item-description {
+            word-wrap: break-word !important;
+            overflow-wrap: break-word !important;
+            max-width: 100% !important;
+        }
+
+        /* Assurer que les colonnes ne se cassent jamais */
+        @media (max-width: 1024px) {
+            .sandwich-body {
+                grid-template-columns: repeat(3, 1fr) !important;
+            }
+        }
+
+        .sandwich-body {
+            -webkit-box-flex: 1 !important;
+            -webkit-flex: 1 !important;
+            -ms-flex: 1 !important;
+            flex: 1 !important;
+            overflow: hidden !important;
+        }
+
+
+        /* Container et wrapper */
+        .sandwich-container {
+            width: 100% !important;
+            height: 100% !important;
+            max-width: 100% !important;
+            box-sizing: border-box !important;
+            padding: 0 !important;
+            margin: 0 !important;
+            display: -webkit-box !important;
+            display: -webkit-flex !important;
+            display: -ms-flexbox !important;
+            display: flex !important;
+            -webkit-box-orient: vertical !important;
+            -webkit-box-direction: normal !important;
+            -webkit-flex-direction: column !important;
+            -ms-flex-direction: column !important;
+            flex-direction: column !important;
+        }
+
+        /* Header du sandwich */
+        .sandwich-header {
+            -webkit-flex-shrink: 0 !important;
+            -ms-flex-negative: 0 !important;
+            flex-shrink: 0 !important;
+            display: -webkit-box !important;
+            display: -webkit-flex !important;
+            display: -ms-flexbox !important;
+            display: flex !important;
+            -webkit-box-orient: horizontal !important;
+            -webkit-box-direction: normal !important;
+            -webkit-flex-direction: row !important;
+            -ms-flex-direction: row !important;
+            flex-direction: row !important;
+            -webkit-box-align: center !important;
+            -webkit-align-items: center !important;
+            -ms-flex-align: center !important;
+            align-items: center !important;
+            -webkit-box-pack: justify !important;
+            -webkit-justify-content: space-between !important;
+            -ms-flex-pack: justify !important;
+            justify-content: space-between !important;
+            padding: 1.5rem 2rem !important;
+        }
+
+        .sandwich-header-left,
+        .sandwich-header-center,
+        .sandwich-header-right {
+            -webkit-box-flex: 1 !important;
+            -webkit-flex: 1 !important;
+            -ms-flex: 1 !important;
+            flex: 1 !important;
+        }
+
+        .sandwich-header-center {
+            text-align: center !important;
+            display: -webkit-box !important;
+            display: -webkit-flex !important;
+            display: -ms-flexbox !important;
+            display: flex !important;
+            -webkit-box-orient: vertical !important;
+            -webkit-box-direction: normal !important;
+            -webkit-flex-direction: column !important;
+            -ms-flex-direction: column !important;
+            flex-direction: column !important;
+            -webkit-box-align: center !important;
+            -webkit-align-items: center !important;
+            -ms-flex-align: center !important;
+            align-items: center !important;
+            -webkit-box-pack: center !important;
+            -webkit-justify-content: center !important;
+            -ms-flex-pack: center !important;
+            justify-content: center !important;
+        }
+
+        .sandwich-header-right {
+            text-align: right !important;
+            display: -webkit-box !important;
+            display: -webkit-flex !important;
+            display: -ms-flexbox !important;
+            display: flex !important;
+            -webkit-box-pack: end !important;
+            -webkit-justify-content: flex-end !important;
+            -ms-flex-pack: end !important;
+            justify-content: flex-end !important;
+        }
+
+        /* Footer du sandwich */
+        .sandwich-footer {
+            -webkit-flex-shrink: 0 !important;
+            -ms-flex-negative: 0 !important;
+            flex-shrink: 0 !important;
+        }
+
+        /* Désactiver tous les paddings qui peuvent causer le débordement */
+        * {
+            box-sizing: border-box !important;
+        }
+
+        /* FOND OPAQUE - Sans transparence pour commencer */
+        .glassmorphism {
+            background: rgba(40, 40, 40, 1.0) !important;
+            -webkit-backdrop-filter: none !important;
+            backdrop-filter: none !important;
+            border: 1px solid rgba(255, 255, 255, 0.2) !important;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3) !important;
+        }
+
+        .glassmorphism-light {
+            background: rgba(255, 255, 255, 1.0) !important;
+            -webkit-backdrop-filter: none !important;
+            backdrop-filter: none !important;
+            border: 1px solid rgba(0, 0, 0, 0.1) !important;
+        }
+
+        /* Textes sur glassmorphism */
+        .glassmorphism .sandwich-column-title,
+        .glassmorphism .sandwich-item-name {
+            color: #ffffff !important;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3) !important;
+        }
+
+        .glassmorphism .sandwich-item-description {
+            color: rgba(255, 255, 255, 0.9) !important;
+            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2) !important;
+        }
+
+        .glassmorphism .sandwich-item-price {
+            color: #ffffff !important;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3) !important;
+        }
+
+        .glassmorphism-light .sandwich-column-title,
+        .glassmorphism-light .sandwich-item-name {
+            color: #000000 !important;
+            text-shadow: none !important;
+        }
+
+        .glassmorphism-light .sandwich-item-description {
+            color: rgba(0, 0, 0, 0.8) !important;
+            text-shadow: none !important;
+        }
+
+        .glassmorphism-light .sandwich-item-price {
+            color: #000000 !important;
+            text-shadow: none !important;
+        }
+
+        /* Espacement dans les items de plat */
+        .sandwich-item {
+            display: -webkit-box !important;
+            display: -webkit-flex !important;
+            display: -ms-flexbox !important;
+            display: flex !important;
+            -webkit-box-align: center !important;
+            -webkit-align-items: center !important;
+            -ms-flex-align: center !important;
+            align-items: center !important;
+            gap: 1rem !important;
+        }
+
+        .sandwich-item-image,
+        .sandwich-item-image-placeholder {
+            -webkit-flex-shrink: 0 !important;
+            -ms-flex-negative: 0 !important;
+            flex-shrink: 0 !important;
+            margin-right: 1rem !important;
+        }
+
+        .sandwich-item-content {
+            -webkit-box-flex: 1 !important;
+            -webkit-flex: 1 !important;
+            -ms-flex: 1 !important;
+            flex: 1 !important;
+            margin-right: 1rem !important;
+        }
+
+        .sandwich-item-price {
+            -webkit-flex-shrink: 0 !important;
+            -ms-flex-negative: 0 !important;
+            flex-shrink: 0 !important;
+        }
+
+        /* Agrandir les textes pour meilleure lisibilité TV */
+        .sandwich-column-title {
+            font-size: 2.5rem !important;
+        }
+
+        .sandwich-item-name {
+            font-size: 1.5rem !important;
+            font-weight: 600 !important;
+        }
+
+        .sandwich-item-description {
+            font-size: 1.125rem !important;
+            line-height: 1.3 !important;
+        }
+
+        .sandwich-item-price {
+            font-size: 2rem !important;
+            font-weight: 700 !important;
+        }
+
+        .sandwich-time {
+            font-size: 2.5rem !important;
+            font-weight: 700 !important;
+        }
+
+        .sandwich-date {
+            font-size: 1.25rem !important;
+        }
+
+        .sandwich-weather {
+            font-size: 1.5rem !important;
+        }
+
+        .sandwich-footer-content {
+            font-size: 1.125rem !important;
+        }
+
+        /* Colonne 3 divisée en 2 sections */
+        .sandwich-column-split {
+            display: -webkit-box !important;
+            display: -webkit-flex !important;
+            display: -ms-flexbox !important;
+            display: flex !important;
+            -webkit-box-orient: vertical !important;
+            -webkit-box-direction: normal !important;
+            -webkit-flex-direction: column !important;
+            -ms-flex-direction: column !important;
+            flex-direction: column !important;
+            gap: 1rem !important;
+        }
+
+        .sandwich-section {
+            -webkit-box-flex: 1 !important;
+            -webkit-flex: 1 !important;
+            -ms-flex: 1 !important;
+            flex: 1 !important;
+            display: -webkit-box !important;
+            display: -webkit-flex !important;
+            display: -ms-flexbox !important;
+            display: flex !important;
+            -webkit-box-orient: vertical !important;
+            -webkit-box-direction: normal !important;
+            -webkit-flex-direction: column !important;
+            -ms-flex-direction: column !important;
+            flex-direction: column !important;
+            gap: 0.75rem !important;
+        }
+
+        .sandwich-section:not(:last-child) {
+            padding-bottom: 1rem !important;
+            margin-bottom: 0.5rem !important;
+            border-bottom: 2px solid rgba(255, 255, 255, 0.2) !important;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <main class="main-content">
+            <div id="plats-grid" class="plats-grid"></div>
+        </main>
+    </div>
+
+    <!-- VERSION 100% ES5 - Compatible tous navigateurs -->
+    <script>
+        console.log('✅ Menu Digital - Version ES5 compatible');
+
+        // Variables globales (var = ES5)
+        var menuData = null;
+
+        // Chargement menu avec XMLHttpRequest (pas fetch)
+        function loadMenuES5() {
+            var xhr = new XMLHttpRequest();
+            xhr.open('GET', 'menu.json?v=' + new Date().getTime(), true);
+
+            xhr.onload = function() {
+                if (xhr.status === 200) {
+                    try {
+                        menuData = JSON.parse(xhr.responseText);
+                        console.log('✅ Menu chargé - Version:', menuData.version);
+
+                        // Afficher le menu
+                        renderMenuES5();
+                    } catch (e) {
+                        console.error('❌ Erreur JSON:', e.message);
+                    }
+                } else {
+                    console.error('❌ Erreur HTTP:', xhr.status);
+                }
+            };
+
+            xhr.onerror = function() {
+                console.error('❌ Impossible de charger menu.json');
+            };
+
+            xhr.send();
+        }
+
+        // Affichage du menu (ES5 pur)
+        function renderMenuES5() {
+            if (!menuData || !menuData.plats) {
+                console.error('❌ Pas de plats dans le menu');
+                return;
+            }
+
+            var grid = document.getElementById('plats-grid');
+            if (!grid) {
+                console.error('❌ Élément plats-grid non trouvé');
+                return;
+            }
+
+            var affichageType = menuData.affichage ? menuData.affichage.type : '3';
+            console.log('📺 Type affichage:', affichageType);
+
+            // Appliquer la classe au body
+            document.body.className = 'affichage-' + affichageType;
+
+            // Appliquer le fond
+            if (menuData.affichage && menuData.affichage.bgImage) {
+                var bgOpacity = menuData.affichage.bgOpacity !== undefined ? menuData.affichage.bgOpacity : 1.0;
+
+                var styleSheet = document.getElementById('dynamic-bg-style');
+                if (!styleSheet) {
+                    styleSheet = document.createElement('style');
+                    styleSheet.id = 'dynamic-bg-style';
+                    document.head.appendChild(styleSheet);
+                }
+
+                styleSheet.textContent =
+                    'body::before {' +
+                    '    background-image: url(\'' + menuData.affichage.bgImage + '\');' +
+                    '    opacity: ' + bgOpacity + ';' +
+                    '}';
+
+                if (menuData.affichage.bgColor) {
+                    document.body.style.backgroundColor = menuData.affichage.bgColor;
+                }
+            }
+
+            // Appliquer couleur des prix
+            if (menuData.affichage && menuData.affichage.priceColor) {
+                document.documentElement.style.setProperty('--price-color', menuData.affichage.priceColor);
+            }
+
+            // Afficher selon le type
+            if (affichageType === '3') {
+                renderAffichage3ES5(grid);
+            } else {
+                // Affichage simple par défaut
+                grid.innerHTML = '<div style="color: white; font-size: 24px; padding: 20px;">Affichage type ' + affichageType + ' non implémenté</div>';
+            }
+
+            console.log('✅ Menu affiché avec succès');
+        }
+
+        // Affichage 3 (Sandwich) en ES5
+        function renderAffichage3ES5(grid) {
+            grid.innerHTML = '';
+            grid.className = 'sandwich-layout';
+
+            var container = document.createElement('div');
+            container.className = 'sandwich-container';
+
+            // Appliquer glassmorphism opacity globalement
+            if (menuData.affichage && menuData.affichage.glassmorphism && menuData.affichage.glassmorphismOpacity !== undefined) {
+                document.documentElement.style.setProperty('--glassmorphism-opacity', menuData.affichage.glassmorphismOpacity);
+                console.log('✨ Glassmorphism opacity:', menuData.affichage.glassmorphismOpacity);
+            }
+
+            // Header
+            var header = document.createElement('div');
+            header.className = 'sandwich-header';
+
+            var logoSrc = 'logo-maxime-h.svg';
+            if (menuData.affichage && menuData.affichage.glassmorphism) {
+                var theme = menuData.affichage.glassmorphismTheme || 'dark';
+                header.classList.add('glassmorphism');
+                if (theme === 'light') {
+                    header.classList.add('glassmorphism-light');
+                } else {
+                    logoSrc = 'logo-maxime-w.svg';
+                }
+            }
+
+            header.innerHTML =
+                '<div class="sandwich-header-left">' +
+                '    <img src="' + logoSrc + '" alt="Logo" class="sandwich-logo" onerror="this.style.display=\'none\'">' +
+                '</div>' +
+                '<div class="sandwich-header-center">' +
+                '    <div class="sandwich-time">12:00:00</div>' +
+                '    <div class="sandwich-date">Lundi 3 novembre 2025</div>' +
+                '</div>' +
+                '<div class="sandwich-header-right">' +
+                '    <div class="sandwich-weather">' +
+                '        <span class="weather-location">📍 Liège</span>' +
+                '        <span class="weather-temp">20°</span>' +
+                '    </div>' +
+                '</div>';
+
+            container.appendChild(header);
+
+            // Body (plats)
+            var body = document.createElement('div');
+            body.className = 'sandwich-body';
+
+            // Créer les colonnes 1 et 2 normalement
+            for (var col = 1; col <= 2; col++) {
+                var column = document.createElement('div');
+                column.className = 'sandwich-column';
+
+                if (menuData.affichage && menuData.affichage.glassmorphism) {
+                    var theme = menuData.affichage.glassmorphismTheme || 'dark';
+                    column.classList.add('glassmorphism');
+                    if (theme === 'light') {
+                        column.classList.add('glassmorphism-light');
+                    }
+                }
+
+                var columnTitle = document.createElement('h2');
+                columnTitle.className = 'sandwich-column-title';
+                columnTitle.textContent = col === 1 ? 'Nos Sandwichs' : 'Nos Spécialités';
+                column.appendChild(columnTitle);
+
+                // Ajouter les plats de cette colonne
+                for (var i = 0; i < menuData.plats.length; i++) {
+                    var plat = menuData.plats[i];
+                    if (plat.colonne === col) {
+                        var item = createSandwichItemES5(plat, false);
+                        column.appendChild(item);
+                    }
+                }
+
+                body.appendChild(column);
+            }
+
+            // Créer la colonne 3 divisée en 2 sections (Desserts + Extras)
+            var column3 = document.createElement('div');
+            column3.className = 'sandwich-column sandwich-column-split';
+
+            if (menuData.affichage && menuData.affichage.glassmorphism) {
+                var theme = menuData.affichage.glassmorphismTheme || 'dark';
+                column3.classList.add('glassmorphism');
+                if (theme === 'light') {
+                    column3.classList.add('glassmorphism-light');
+                }
+            }
+
+            // Section Desserts (colonne 3)
+            var dessertsSection = document.createElement('div');
+            dessertsSection.className = 'sandwich-section';
+
+            var dessertsTitle = document.createElement('h2');
+            dessertsTitle.className = 'sandwich-column-title';
+            dessertsTitle.textContent = 'Nos Desserts';
+            dessertsSection.appendChild(dessertsTitle);
+
+            for (var i = 0; i < menuData.plats.length; i++) {
+                var plat = menuData.plats[i];
+                if (plat.colonne === 3) {
+                    var item = createSandwichItemES5(plat, false);
+                    dessertsSection.appendChild(item);
+                }
+            }
+
+            column3.appendChild(dessertsSection);
+
+            // Section Extras (colonne 4)
+            var extrasSection = document.createElement('div');
+            extrasSection.className = 'sandwich-section';
+
+            var extrasTitle = document.createElement('h2');
+            extrasTitle.className = 'sandwich-column-title';
+            extrasTitle.textContent = 'Extras';
+            extrasSection.appendChild(extrasTitle);
+
+            for (var i = 0; i < menuData.plats.length; i++) {
+                var plat = menuData.plats[i];
+                if (plat.colonne === 4) {
+                    var item = createSandwichItemES5(plat, true); // true = isExtra, ajoute le "+"
+                    extrasSection.appendChild(item);
+                }
+            }
+
+            column3.appendChild(extrasSection);
+            body.appendChild(column3);
+
+            container.appendChild(body);
+
+            // Footer
+            var footer = document.createElement('div');
+            footer.className = 'sandwich-footer';
+
+            if (menuData.affichage && menuData.affichage.glassmorphism) {
+                var theme = menuData.affichage.glassmorphismTheme || 'dark';
+                footer.classList.add('glassmorphism');
+                if (theme === 'light') {
+                    footer.classList.add('glassmorphism-light');
+                }
+            }
+
+            footer.innerHTML =
+                '<div class="sandwich-footer-content">' +
+                '    <span>Semaine ' + (menuData.semaine ? menuData.semaine.numero : '') + '</span>' +
+                '    <span>' + (menuData.restaurant ? menuData.restaurant.email : '') + '</span>' +
+                '</div>';
+
+            container.appendChild(footer);
+            grid.appendChild(container);
+        }
+
+        // Créer un item sandwich
+        function createSandwichItemES5(plat, isExtra) {
+            var item = document.createElement('div');
+            item.className = 'sandwich-item';
+
+            var imageHTML = plat.image
+                ? '<img src="' + plat.image + '" alt="' + plat.nom + '" class="sandwich-item-image">'
+                : '<div class="sandwich-item-image-placeholder">🍽️</div>';
+
+            var pricePrefix = isExtra ? '+' : '';
+            var priceHTML = pricePrefix + plat.prix.toFixed(2) + ' €';
+
+            item.innerHTML =
+                imageHTML +
+                '<div class="sandwich-item-content">' +
+                '    <div class="sandwich-item-name">' + plat.nom + '</div>' +
+                '    <div class="sandwich-item-description">' + (plat.description || '') + '</div>' +
+                '</div>' +
+                '<div class="sandwich-item-price">' + priceHTML + '</div>';
+
+            return item;
+        }
+
+        // Démarrer au chargement
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', function() {
+                loadMenuES5();
+            });
+        } else {
+            loadMenuES5();
+        }
+    </script>
+</body>
+</html>

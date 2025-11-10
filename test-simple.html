@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Test Simple</title>
+    <style>
+        body {
+            font-family: Arial;
+            padding: 20px;
+            background: #000;
+            color: #0f0;
+        }
+        .result {
+            margin: 10px 0;
+            padding: 10px;
+            border: 1px solid #0f0;
+        }
+    </style>
+</head>
+<body>
+    <h1>Test Simple - Chargement JSON</h1>
+    <div id="output"></div>
+
+    <script>
+        var output = document.getElementById('output');
+
+        function log(msg) {
+            var div = document.createElement('div');
+            div.className = 'result';
+            div.innerHTML = msg;
+            output.appendChild(div);
+        }
+
+        log('1. Test démarré...');
+
+        // Test 1: XMLHttpRequest (compatible vieux navigateurs)
+        var xhr = new XMLHttpRequest();
+        xhr.open('GET', 'menu.json?v=' + new Date().getTime(), true);
+
+        xhr.onload = function() {
+            if (xhr.status === 200) {
+                log('2. ✓ menu.json chargé (HTTP 200)');
+
+                try {
+                    var data = JSON.parse(xhr.responseText);
+                    log('3. ✓ JSON parsé avec succès');
+                    log('4. Version: ' + (data.version || 'non spécifiée'));
+                    log('5. Type affichage: ' + (data.affichage ? data.affichage.type : 'non spécifié'));
+                    log('6. Nombre de plats: ' + (data.plats ? data.plats.length : 0));
+                    log('7. Image de fond: ' + (data.affichage ? data.affichage.bgImage : 'non spécifiée'));
+                    log('8. Glassmorphism: ' + (data.affichage ? data.affichage.glassmorphism : false));
+                } catch (e) {
+                    log('ERREUR: Impossible de parser le JSON - ' + e.message);
+                }
+            } else {
+                log('ERREUR: HTTP ' + xhr.status + ' - ' + xhr.statusText);
+            }
+        };
+
+        xhr.onerror = function() {
+            log('ERREUR: Impossible de charger menu.json (erreur réseau)');
+        };
+
+        xhr.send();
+
+        log('Test en cours...');
+    </script>
+</body>
+</html>
